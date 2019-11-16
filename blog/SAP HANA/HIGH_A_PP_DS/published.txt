@@ -1,0 +1,1 @@
+https://blogs.sap.com/2019/11/07/sap-hana-high-availability-and-pp-ds-module/
