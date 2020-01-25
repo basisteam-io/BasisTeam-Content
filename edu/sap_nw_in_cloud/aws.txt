@@ -1,0 +1,60 @@
+---- Download SAP NetWeaver AS ABAP Developer Edition 7.52 SP04 Part 1 – Part 11
+https://developers.sap.com/trials-downloads.html
+
+----  Register / Log-in in AWS (Amazon Web Services)
+ https://signin.aws.amazon.com/
+
+
+----  The process of creating a virtual machine
+https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/putty.html
+
+----  The Connection process
+https://notepad-plus-plus.org/
+https://www.putty.org/
+https://www.puttygen.com/
+https://winscp.net/eng/index.php
+https://mremoteng.org/
+AWS-vhcalnplci
+
+----  The Preparatory process
+sudo -i 
+https://aws.amazon.com/ru/premiumsupport/knowledge-center/linux-static-hostname/
+ifconfig
+vi /etc/hosts
+127.0.0.1 localhost vhcalnplci
+hostnamectl set-hostname vhcalnplci
+hostname
+https://www.thegeekdiary.com/how-to-create-and-mount-filesystems-in-linux/
+lsblk
+fdisk /dev/sdb
+lsblk
+mkfs.ext4 /dev/sdb1
+mkfs.ext4 /dev/sdb2
+mkdir /usr/sap
+mkdir /distr
+mount /dev/sdb1 /distr
+mount /dev/sdb1 /usr/sap
+vi /etc/fstab
+/dev/sdb1 /distr ext4 defaults 1 1
+/dev/sdb2 /usr/sap ext4 defaults 1 1
+zypper install uuidd
+service uuidd start
+rpm -qa | grep libaio
+rpm -qa | grep libaio1
+
+https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/putty.html#Transfer_WinSCP
+
+---- The Installation process 
+cd /distr
+./install.sh
+
+---- The Post-installation process
+username – DDIC
+password – Down1oad
+DEVELOPER
+BWDEVELOPER
+DDIC
+SAP*
+
+---- The Maintain License process
+https://go.support.sap.com/minisap/#/minisap

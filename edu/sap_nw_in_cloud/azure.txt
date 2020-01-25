@@ -1,0 +1,56 @@
+---- Download SAP NetWeaver AS ABAP Developer Edition 7.52 SP04 Part 1 – Part 11
+https://developers.sap.com/trials-downloads.html
+
+----  Register / Log-in in Microsoft Azure.
+https://portal.azure.com/
+
+
+----  The process of creating a virtual machine
+https://docs.microsoft.com/en-us/azure/virtual-machines/linux/ssh-from-windows
+
+----  The Connection process
+https://notepad-plus-plus.org/
+https://www.putty.org/
+https://www.puttygen.com/
+https://winscp.net/eng/index.php
+https://mremoteng.org/
+Azure - vhcalnplci
+
+----  The Preparatory process
+https://www.thegeekdiary.com/how-to-create-and-mount-filesystems-in-linux/
+
+sudo -i 
+lsblk
+fdisk /dev/sdb
+lsblk
+mkfs.ext4 /dev/sdb1
+mkfs.ext4 /dev/sdb2
+mkdir /usr/sap
+mkdir /distr
+mount /dev/sdb1 /distr
+mount /dev/sdb1 /usr/sap
+vi /etc/fstab
+/dev/sdb1 /distr ext4 defaults 1 1
+/dev/sdb2 /usr/sap ext4 defaults 1 1
+zypper install uuidd
+service uuidd start
+rpm -qa | grep libaio
+rpm -qa | grep libaio1
+ifconfig
+vi /etc/hosts
+
+
+---- The Installation process 
+cd /distr
+./install.sh
+
+---- The Post-installation process
+username – DDIC
+password – Down1oad
+DEVELOPER
+BWDEVELOPER
+DDIC
+SAP*
+
+---- The Maintain License process
+https://go.support.sap.com/minisap/#/minisap
