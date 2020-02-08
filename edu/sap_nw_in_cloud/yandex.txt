@@ -13,6 +13,7 @@ https://mremoteng.org/
 YandexCloud - vhcalnplci
 
 ----  The Preparatory process
+https://www.udemy.com/courses/search/?src=ukw&q=Linux
 https://www.thegeekdiary.com/how-to-create-and-mount-filesystems-in-linux/
 
 sudo -i 
@@ -25,9 +26,11 @@ mkdir /usr/sap
 mkdir /distr
 mount /dev/sdb1 /distr
 mount /dev/sdb1 /usr/sap
+file -s /dev/sdb1
+file -s /dev/sdb2
 vi /etc/fstab
-/dev/sdb1 /distr ext4 defaults 1 1
-/dev/sdb2 /usr/sap ext4 defaults 1 1
+[UUID for /dev/sdb1] /distr ext4 defaults 1 1
+[UUID for /dev/sdb2] /usr/sap ext4 defaults 1 1
 zypper install uuidd
 service uuidd start
 rpm -qa | grep libaio
