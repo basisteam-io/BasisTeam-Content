@@ -32,6 +32,7 @@ mount /dev/sdb1 /distr
 mount /dev/sdb1 /usr/sap
 file -s /dev/sdb1
 file -s /dev/sdb2
+cp /etc/fstab /etc/fstab_backup
 vi /etc/fstab
 [UUID for /dev/sdb1] /distr ext4 defaults 1 1
 [UUID for /dev/sdb2] /usr/sap ext4 defaults 1 1
