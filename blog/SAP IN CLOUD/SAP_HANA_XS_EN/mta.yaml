@@ -1,0 +1,11 @@
+ID: XSA
+_schema-version: '2.1'
+version: 0.0.1
+
+modules:
+ - name: ui
+   type: html5
+   path: myxsaapp1/ui
+
+ 
+

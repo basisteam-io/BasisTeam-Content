@@ -1,0 +1,16 @@
+ID: helloworld
+_schema-version: '2.0'
+version: 0.0.1
+
+applications:
+
+
+ - name: helloworld-ui
+   type: html5
+   path: ui
+   memory: 128M
+   env:
+    destinations: >
+     [
+      {"name":"xsjs-backend", "url":"https://<xsa-host>:51510"}
+     ]
