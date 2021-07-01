@@ -1,0 +1,6 @@
+sudo yum check-update
+sudo curl -fsSL https://get.docker.com/ | sh
+sudo usermod -aG docker centos
+sudo systemctl start docker
+sudo systemctl status docker
+sudo docker login
