@@ -34,7 +34,7 @@ FUNCTION zfm_ewm107_openhu.
   CLEAR:
      et_open_nested_hu.
 
-* Определим вложенность для ЕО
+*  Define nesting HU
 
   lr_huident = VALUE #( ( sign = 'I' option = 'EQ' low = lv_huident ) ).
 
@@ -57,7 +57,7 @@ FUNCTION zfm_ewm107_openhu.
 
   READ TABLE lt_huhdr ASSIGNING FIELD-SYMBOL(<fs_huhdr>) WITH KEY huident = lv_huident.
 
-  IF <fs_huhdr>-bottom IS NOT INITIAL. "Это ТМ, TMK. Вложеность определять не нужно.
+  IF <fs_huhdr>-bottom IS NOT INITIAL. "This is bottom level HU. Nesting does not need to be defined.
 
 
 
@@ -69,18 +69,18 @@ FUNCTION zfm_ewm107_openhu.
       EXCEPTIONS
         other             = 99.
 
-    " ЕО нижнего уровня вскрыта, возвращаем признак вскрытой ЕО
+    " Bottom HU opened, return flag of opened HU
     IF lv_openhu = abap_true.
       ev_openhu = abap_true.
     ENDIF.
 
 
 
-  ELSEIF <fs_huhdr>-bottom IS INITIAL. " "Это паллета. Перебираем ЕО на паллете
+  ELSEIF <fs_huhdr>-bottom IS INITIAL. "This is a pallet. Sorting HU on a pallet
 
     LOOP AT lt_huhdr ASSIGNING FIELD-SYMBOL(<fs_huhdr_int>).
 
-      IF <fs_huhdr_int>-bottom IS NOT INITIAL. " работаем только с ТМ на паллете
+      IF <fs_huhdr_int>-bottom IS NOT INITIAL. 
 
         CALL FUNCTION 'ZFM_EWM107_OPENHU_SINGLE'
           EXPORTING
@@ -91,21 +91,21 @@ FUNCTION zfm_ewm107_openhu.
             other             = 99.
 
 
-        IF lv_openhu = abap_true. " Вложенная ЕО вскрыта
-          " Возвращаем признак вскрытой
+        IF lv_openhu = abap_true. "Bottom HU opened, return flag of opened HU
+
           ev_openhu = abap_true.
-          " Готовим список вскрытых вложенных ЕО
+          " List of opened HU
           APPEND INITIAL LINE TO lt_openned_nested_hu ASSIGNING FIELD-SYMBOL(<fs_openned_nested_hu>).
           <fs_openned_nested_hu>-huident_nested = <fs_huhdr_int>-huident.
-        ENDIF. " Вложенная ЕО вскрыта
-      ENDIF.  " Работаем только с ТМ на паллете
-    ENDLOOP. " Перебор EО вложености
+        ENDIF. " 
+      ENDIF.  "
+    ENDLOOP. " 
 
     DELETE ADJACENT DUPLICATES FROM lt_openned_nested_hu COMPARING huident_nested.
     et_open_nested_hu = lt_openned_nested_hu.
     CLEAR lt_openned_nested_hu.
 
-  ENDIF." Это паллета
+  ENDIF.
 
 
 ENDFUNCTION.

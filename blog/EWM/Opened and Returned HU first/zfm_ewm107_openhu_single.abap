@@ -41,24 +41,18 @@ FUNCTION ZFM_EWM107_OPENHU_SINGLE.
       ENDIF.
 
 
-      LOOP AT lt_ordim_c ASSIGNING <ls_ordim_c>."Перебор складских задач
+      LOOP AT lt_ordim_c ASSIGNING <ls_ordim_c>."WT enumeration
 
-* Отбор сырья происходит в складском месте PBSPIS
-* Вскрытая ЕО (ЕО с отбором проб) - это ЕО для которой
-* Сушествует выполненная складская задача:
+
 * /SCWM/ORDIM_C-TOSTAT = 'C'
-* У которой:
-*  /SCWM/ORDIM_C-NLPLA = 'PBSPIS'
-* Принимающее складское место - комната отбора проб PBSPIS
-* /SCWM/ORDIM_C-NLPLA = 'PBSPIS'
-* ЕО источник и ЕО приёмник разные,
-* т.е это не перемещение в PBSPIS, а отбор:
+*  /SCWM/ORDIM_C-NLPLA = 'SPROB1'
+* HU source and HU target are different
 * /SCWM/ORDIM_C-VLENR < > /SCWM/ORDIM_C-NLENR
 
-        IF <ls_ordim_c>-tostat = 'C' AND <ls_ordim_c>-nlpla = 'PBSPIS' "Был отбор
+        IF <ls_ordim_c>-tostat = 'C' AND <ls_ordim_c>-nlpla = 'SPROB1' "Sample selection exists
           AND <ls_ordim_c>-vlenr NE <ls_ordim_c>-nlenr.
           ev_openhu_single = abap_true.
-        ENDIF."Был отбор
-         ENDLOOP.   "Перебор складских задач
+        ENDIF."Sample selection exists
+         ENDLOOP.   "WT enumeration
 
 ENDFUNCTION.
