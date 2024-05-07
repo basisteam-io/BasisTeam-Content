@@ -1,8 +1,6 @@
  METHOD get_available_stock.
     DATA: lr_matnr       TYPE RANGE OF /scwm/de_matnr.
-*          lt_data_parent TYPE /scwm/tt_lagp_mon,
-*          ls_data_parent TYPE /scwm/s_lagp_mon,
-*          lt_lagp        TYPE STANDARD TABLE OF /scwm/lagp.
+
 
     lr_matnr = VALUE #( FOR mat IN it_prd ( sign    = rs_c_range_sign-including
 *                                            option  = rs_c_range_opt-notequal
@@ -17,25 +15,6 @@
     SORT lr_matnr.
     DELETE ADJACENT DUPLICATES FROM lr_matnr.
 
-*    DATA(lt_tab_range) = VALUE rsds_trange( ( tablename = '/SCWM/AQUA'
-*                                              frange_t  = VALUE rsds_frange_t( ( fieldname  = 'MATNR'
-*
-*                                                                                 selopt_t   = lr_matnr ) ) ) ).
-
-
-
-
-
-
-*    CALL FUNCTION '/SCWM/AVLSTOCK_OVERVIEW_MON'
-*      EXPORTING
-*        "it_data_parent = lt_data_parent
-*        iv_lgnum     = ms_input-lgnum "Warehouse number
-*        iv_mode      = '2'
-*      IMPORTING
-*        et_data      = rt_data
-*      CHANGING
-*        ct_tab_range = lt_tab_range.
 
     DATA: lt_stock_mon TYPE /scwm/tt_stock_mon.
 
