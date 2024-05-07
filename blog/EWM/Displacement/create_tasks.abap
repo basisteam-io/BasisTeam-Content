@@ -35,11 +35,7 @@ FORM create_tasks.
     SORT lt_huhdr BY huident.
   ENDIF.
 
-* ----> 30.10.2018 15:35:15 Begin Torlopov Solmix
-
   IF zcl_tvarvc=>read_parameter( i_name = 'ZEWM_CLEANUP_NEW' ) IS NOT INITIAL.
-
-*    break itetorlopov.
 
     DATA lt_create_hu TYPE /scwm/tt_to_crea_hu.
     FIELD-SYMBOLS <fs_create_hu> LIKE LINE OF lt_create_hu.
@@ -52,17 +48,7 @@ FORM create_tasks.
           <fs_create_hu>-procty = <fs_prc>-procty.
         ENDIF.
 
-*        READ TABLE lt_huhdr ASSIGNING <fs_huhdr> WITH KEY huident = <fs_data>-huident BINARY SEARCH.
-*        IF sy-subrc = 0.
-*          <fs_create_hu>-letyp = <fs_huhdr>-letyp.
-*        ENDIF.
-*
-*        <fs_creat>-anfme = <fs_data>-quan.
-**      <fs_creat>-letyp = 'E1'.
-*        <fs_creat>-owner_role = 'BP'.
-*        <fs_creat>-entitled_role = 'BP'.
-*        <fs_creat>-vlpla = <fs_data>-lgpla.
-**      <fs_creat>-vltyp = <fs_data>-lgtyp.
+
       ENDLOOP.
     ELSE.
       LOOP AT gt_rows ASSIGNING <fs_lines>.
@@ -75,17 +61,6 @@ FORM create_tasks.
             <fs_create_hu>-procty = <fs_prc>-procty.
           ENDIF.
 
-*          READ TABLE lt_huhdr ASSIGNING <fs_huhdr> WITH KEY huident = <fs_data>-huident BINARY SEARCH.
-*          IF sy-subrc = 0.
-*            <fs_creat>-letyp = <fs_huhdr>-letyp.
-*          ENDIF.
-*
-*          <fs_creat>-anfme = <fs_data>-quan.
-**        <fs_creat>-letyp = 'E1'.
-*          <fs_creat>-owner_role = 'BP'.
-*          <fs_creat>-entitled_role = 'BP'.
-*          <fs_creat>-vlpla = <fs_data>-lgpla.
-**        <fs_creat>-vltyp = <fs_data>-lgtyp.
         ENDIF.
       ENDLOOP.
     ENDIF.
@@ -103,11 +78,11 @@ FORM create_tasks.
         ev_severity    = lv_severity.
     .
     IF lv_severity CA 'EXA'.
-      MESSAGE s006 INTO lv_dummy. "Складская залача &1 создана
+      MESSAGE s006 INTO lv_dummy. "Task created
       PERFORM move_messg_to_log.
       PERFORM move_messg_to_log2 USING lt_bapiret.
     ELSE.
-      MESSAGE s005 INTO lv_dummy WITH lv_tanum. "Складская залача &1 создана
+      MESSAGE s005 INTO lv_dummy WITH lv_tanum. "Task created
       PERFORM move_messg_to_log.
     ENDIF.
 
@@ -115,7 +90,6 @@ FORM create_tasks.
 
   ENDIF.
 
-* <---- 30.10.2018 15:35:15 End Torlopov Solmix
 
   IF gt_rows[] IS INITIAL.
     LOOP AT gt_main_data ASSIGNING <fs_data>.
@@ -175,11 +149,11 @@ FORM create_tasks.
       et_bapiret  = lt_bapiret
       ev_severity = lv_severity.
   IF lv_severity CA 'EXA'.
-    MESSAGE s006 INTO lv_dummy. "Складская залача &1 создана
+    MESSAGE s006 INTO lv_dummy. "Task created
     PERFORM move_messg_to_log.
     PERFORM move_messg_to_log2 USING lt_bapiret.
   ELSE.
-    MESSAGE s005 INTO lv_dummy WITH lv_tanum. "Складская залача &1 создана
+    MESSAGE s005 INTO lv_dummy WITH lv_tanum. "Task created
     PERFORM move_messg_to_log.
   ENDIF.
 ENDFORM.
