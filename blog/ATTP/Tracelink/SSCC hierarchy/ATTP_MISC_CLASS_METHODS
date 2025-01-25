@@ -1,0 +1,33 @@
+DATA(lo_messages) = /sttp/cl_messages=>create_new_handler_att( ).
+
+doctpe = /sttp/cl_dm_constants=>gcs_doctype-returns_delivery.
+
+
+CALL METHOD /sttp/cl_dm_query=>query_objectdata_single
+        EXPORTING
+          iv_objcode         = iv_objcode
+          ib_with_auth_check = 'X'
+        IMPORTING
+          es_cont_result     = ls_cont_result.
+		  
+CALL METHOD /sttp/cl_dm_query=>query_transdata
+        EXPORTING
+  iv_objid        = ls_cont_result-objid
+        IMPORTING
+            et_trans_result = it_trans_result.
+			
+ CALL METHOD /sttp/cl_dm_query=>query_transdata
+    EXPORTING
+      iv_docnum       = p_docnum
+      iv_doctpe       = p_doctype
+    IMPORTING
+      et_trans_result = lt_trns.
+			
+			
+*Find shipping and store timestamp
+      PERFORM get_evt_timestamp
+      USING <lfs_obd>-docnum
+            /sttp/cl_dm_constants=>gcs_doctype-outbound_delivery
+            /sttp/cl_dm_constants=>gcs_bizstep-shipping
+            p_sscc_box
+      CHANGING l_shipped_ts.
