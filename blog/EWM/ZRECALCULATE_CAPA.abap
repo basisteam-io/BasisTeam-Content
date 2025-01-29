@@ -39,7 +39,7 @@
 *&     Corrected Issue: KZVOL is cleared for divided main bins
 *&
 *&   When changing this report, make sure you are changing the newest
-*&   Version, which is attached to note 1533672, and describe the
+*&   Version, which is attached to note 1532672, and describe the
 *&   Changes in this comment, please also update the Version Number
 *&---------------------------------------------------------------------*
 REPORT  zrecalculate_capa.
